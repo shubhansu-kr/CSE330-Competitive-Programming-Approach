@@ -28,6 +28,34 @@ public:
         return true;
     }
 
+};
+
+class Solution {
+public:
+    // BruteForce: TLE
+    int countPrimes(int n) {
+        if (n < 3) return 0;
+
+        int  count = 1;
+        for (int i = 3; i < n; ++i)
+        {
+            if (isPrime(i)) ++count;
+            ++i;
+        }
+        return count;
+    }
+
+    bool isPrime(int n) {
+        if (n < 2) return false;
+        
+        for (int i = 2; i < n/2; ++i)
+        {
+            if (n % i == 0) return false;
+        }        
+
+        return true;
+    }
+
     bool isFullPrime(int n) {
         // A number 'n' is called full prime if n itself is prime and all it's digits
         // are also prime. eg. 37 is prime and 3, 7 are also prime so 37 is full prime.
