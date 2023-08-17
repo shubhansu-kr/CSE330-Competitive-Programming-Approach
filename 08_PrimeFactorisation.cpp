@@ -10,25 +10,26 @@ public:
         ans.emplace_back(1);
 
         int k = n; 
-        while(!isPrime(k)) {
-            
+        while (k % 2 == 0) {
+            ans.emplace_back(2);
+            k /= 2;
         }
-        ans.emplace_back(k);
-    }
 
-    bool isPrime(int n)
-    {
-        if (n < 2) return false;
-
-        if (n == 2 || n == 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (int i = 5; i*i <= n; i = i + 6)
+        for (int i = 3; i*i < k; ++i)
         {
-            if (n % i == 0 || n % (i+2) == 0) return false;
+            if (k % i == 0) {
+                ans.emplace_back(i);
+                k /= i;
+                --i;
+            }
+            else {
+                ++i;
+            }
         }
+        
+        if (k > 2) ans.emplace_back(k);
 
-        return true;
+        return ans;
     }
 };
 
