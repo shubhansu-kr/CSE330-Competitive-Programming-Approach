@@ -11,6 +11,12 @@ public:
     bool isSpecialPrime(int n) {
         vector<bool> primes = sieveOfErastosthenes(n);
 
+        int k = n;
+        while(k) {
+            if (!primes[k]) return false;
+            k /= 10; 
+        }
+        return true;
     }
 
     vector<bool> sieveOfErastosthenes(int n) {
