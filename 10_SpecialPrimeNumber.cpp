@@ -6,6 +6,31 @@
 #include <bits/stdc++.h>
 using namespace std ;
 
+class Solution1 {
+public: 
+    bool isSpecialPrime(int n) {
+        vector<bool> primes = sieveOfErastosthenes(n);
+
+    }
+
+    vector<bool> sieveOfErastosthenes(int n) {
+        vector<bool> primes(n+1, true);
+        primes[0] = primes[1] = false;
+        for (int i = 2; i <= n; ++i)
+        {
+            if (primes[i]) {
+                int index = i * 2;
+                while(index <= n) {
+                    primes[index] = false; 
+                    index += i;
+                }
+            }
+        }
+
+        return primes;
+    }
+};
+
 class Solution {
 public: 
     bool isSpecialPrime(int n) {

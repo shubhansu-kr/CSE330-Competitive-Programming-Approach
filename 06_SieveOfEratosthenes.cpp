@@ -19,7 +19,7 @@ public:
                 int index = i * 2;
                 while(index <= n) {
                     primes[index] = false; 
-                    index += index;
+                    index += i;
                 }
             }
         }
