@@ -12,7 +12,7 @@ public:
         unordered_set<int> st;
         for(auto &it: A) {st.insert(it);}
 
-        int D = st.size();`
+        int D = st.size();
 
         if (D < B) return 0;
         return abs(B-D);
