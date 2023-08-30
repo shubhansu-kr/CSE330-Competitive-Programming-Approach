@@ -1,44 +1,46 @@
-// Test
+// 
 
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std ;
 
-class Solution1 {
-public: 
-    int countPairs(vector<int> &A) {
-        int n = A.size();
-        int count = 0;
+long long findExecutionTime (vector<int> execution){
+    unordered_map<int, int> fx;
+    for (int i = 0; i < execution.size(); ++i)
+    {
+        fx[execution[i]] = execution[i];
+    }
 
-        for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-                if (2 * (A[i] | A[j]) + (A[i] ^ A[j]) >= A[i] + A[j]) {
-                    ++count;
-                }
-            }
+    long long ans = 0;
+    for (int i = 0; i < execution.size(); ++i)
+    {
+        ans += fx[execution[i]];
+        cout << ans << " " << fx[execution[i]] << endl;
+        fx[execution[i]] = (fx[execution[i]]+1)/2;
+    }
+    
+    return ans;
+}
+
+int findMinInterference(string serverType){
+    int ans = 0;
+    int i = 0;
+    while (serverType[i] == '?'){
+        ++i;
+    }
+    char current = serverType[i++];
+    while(i < serverType.size()){
+        if (serverType[i] != '?' && serverType[i] != current){
+            ++ans;
+            current = serverType[i];
         }
-
-        return count;
+        ++i;
     }
-};
+    return ans;
+}
 
-class Solution
-{
-public:
-    int minOperation(vector<int> &A, int B) {
-        if (B > A.size()) return 0;
-
-        unordered_set<int> st;
-        for(auto &it: A) {st.insert(it);}
-
-        int D = st.size();
-
-        if (D < B) return 0;
-        return abs(B-D);
-    }
-};
-
-int main()
-{
+int main () {
+    string s = "";
+    cout << findMinInterference(s);
 
     return 0;
 }
