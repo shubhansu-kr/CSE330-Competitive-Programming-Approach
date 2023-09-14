@@ -4,6 +4,24 @@
 using namespace std ;
 
 class Solution{
+    // Recursion: Memoization
+public: 
+    bool solve(int arr[], int m, int sum, int i){
+        if (i < 0) return false;
+        if (sum <= m) return sum == m;
+
+        return solve(arr, m+arr[i], sum-arr[i], i-1) || solve(arr, m, sum, i-1);
+    }
+
+    int sisterCoin(int arr[], int n, int m){
+        int sum = 0;
+        for (int i = 0; i < n; ++i){sum += arr[i];}
+        
+        return solve(arr, m, sum, n-1);
+    }
+};
+
+class Solution{
     // BruteForce: Recursion
     // TLE
 public: 
