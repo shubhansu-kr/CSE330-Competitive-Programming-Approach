@@ -4,6 +4,25 @@
 #include <bits/stdc++.h>
 using namespace std ;
 
+class Solution3 {
+    // Tabulation: Space Optimised.
+    // DP can be applied only when there is an overlapping subproblem.
+public: 
+    int fibo(int n) {
+        if (n < 2) return n;
+
+        int prev = 0, prev1 = 1;
+
+        for(int i = 2; i < n+1; ++i) {
+            int temp = prev1;
+            prev1 = prev + prev1;
+            prev = temp;
+        }
+
+        return prev1;
+    }
+}
+
 class Solution2 {
     // Tabulation
     // DP can be applied only when there is an overlapping subproblem.
