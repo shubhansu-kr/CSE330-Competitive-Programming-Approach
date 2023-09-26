@@ -12,7 +12,7 @@ public:
         if (n < 2) return n;
 
         int prev = 0, prev1 = 1;
-
+ 
         for(int i = 2; i < n+1; ++i) {
             int temp = prev1;
             prev1 = prev + prev1;
