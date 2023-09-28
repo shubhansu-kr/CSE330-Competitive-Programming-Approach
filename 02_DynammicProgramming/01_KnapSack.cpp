@@ -3,7 +3,38 @@
 #include <bits/stdc++.h>
 using namespace std ;
 
-class Solution1{
+class Solution3{
+    // Tabulation:
+public: 
+    int knapSack(vector<int> &values, vector<int> &weight, int bag) {
+        int n = values.size();
+
+        vector<vector<int>> dp(n, vector<int>(bag+1));
+
+        for(int j = 0; j <= bag; ++j) {
+            if (j >= weight[0]) {
+                dp[0][j] = values[0];
+            }
+        }
+
+        for(int i = 1; i < n; ++i) {
+            for(int j = 1; j <= bag; ++j) {
+
+                int pick = INT_MIN;
+                if (j - weight[i] >= 0) {
+                    pick = values[i] + dp[i-1][j-weight[i]];
+                }
+                int noPick = dp[j][i-1];
+
+                dp[i][j] = max(pick, noPick);
+            }
+        }
+
+        return dp[n-1][bag];
+    }
+};
+
+class Solution2{
     // Recursion: Memoization
 public: 
     int solve(vector<vector<int>> &dp, vector<int> &values, vector<int> &weight, int bag, int i) {
