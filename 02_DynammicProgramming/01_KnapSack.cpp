@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 using namespace std ;
 
-class Solution3{
+class Solution4{
     // Tabulation: Space Optimisation
 public: 
     int knapSack(vector<int> &values, vector<int> &weight, int bag) {
