@@ -4,6 +4,39 @@
 using namespace std ;
 
 class Solution3{
+    // Tabulation: Space Optimisation
+public: 
+    int knapSack(vector<int> &values, vector<int> &weight, int bag) {
+        int n = values.size();
+
+        vector<int> prev(bag+1);
+
+        for(int j = 0; j <= bag; ++j) {
+            if (j >= weight[0]) {
+                prev[j] = values[0];
+            }
+        }
+
+        for(int i = 1; i < n; ++i) {
+            vector<int> temp(bag+1);
+            for(int j = 1; j <= bag; ++j) {
+
+                int pick = INT_MIN;
+                if (j - weight[i] >= 0) {
+                    pick = values[i] + prev[j-weight[i]];
+                }
+                int noPick = prev[j];
+
+                temp[j] = max(pick, noPick);
+            }
+            prev = temp;
+        }
+
+        return prev[bag];
+    }
+};
+
+class Solution3{
     // Tabulation:
 public: 
     int knapSack(vector<int> &values, vector<int> &weight, int bag) {
@@ -24,7 +57,7 @@ public:
                 if (j - weight[i] >= 0) {
                     pick = values[i] + dp[i-1][j-weight[i]];
                 }
-                int noPick = dp[j][i-1];
+                int noPick = dp[i-1][j];
 
                 dp[i][j] = max(pick, noPick);
             }
