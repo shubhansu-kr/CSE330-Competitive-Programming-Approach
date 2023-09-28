@@ -3,6 +3,39 @@
 #include <bits/stdc++.h>
 using namespace std ;
 
+class Solution5{
+    // GFG: https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
+public:
+    //Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+        vector<int> prev(W+1);
+
+        for(int j = 0; j <= W; ++j) {
+            if (j >= wt[0]) {
+                prev[j] = val[0];
+            }
+        }
+
+        for(int i = 1; i < n; ++i) {
+            vector<int> temp(W+1);
+            for(int j = 1; j <= W; ++j) {
+
+                int pick = INT_MIN;
+                if (j - wt[i] >= 0) {
+                    pick = val[i] + prev[j-wt[i]];
+                }
+                int noPick = prev[j];
+
+                temp[j] = max(pick, noPick);
+            }
+            prev = temp;
+        }
+
+        return prev[W];
+    }
+};
+
 class Solution4{
     // Tabulation: Space Optimisation
 public: 
