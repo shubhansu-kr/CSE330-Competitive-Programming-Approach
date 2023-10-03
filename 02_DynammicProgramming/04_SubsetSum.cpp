@@ -9,6 +9,32 @@ using namespace std;
 // } Driver Code Ends
 //User function template for C++
 
+class Solution2{  
+    // Tabulation
+public:
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+        vector<vector<bool>> dp(n, vector<bool> (sum+1, false));
+
+        for(int j = 0; j <= sum; ++j) {
+            if (j == arr[0]) dp[0][j] = true;
+        }
+
+        for(int i = 0; i < n; ++i) {
+            dp[i][0] = true;
+        }
+
+        for(int i = 1; i < n; ++i) {
+            for(int j = 0; j <= sum; ++j) {
+                dp[i][j] = dp[i-1][j];
+                if (j - arr[i] >= 0) dp[i][j] = dp[i][j] || dp[i-1][j-arr[i]];
+            }
+        }
+
+        return dp[n-1][sum];
+    }
+};
+
 class Solution1{  
     // Recursion: Memoization
 public:
