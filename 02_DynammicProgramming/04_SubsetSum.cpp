@@ -9,6 +9,32 @@ using namespace std;
 // } Driver Code Ends
 //User function template for C++
 
+class Solution3{  
+    // Tabulation: Space Optimisation
+public:
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+
+        vector<bool> prev(sum+1);
+        prev[0] = true;
+
+        for(int j = 0; j <= sum; ++j) {
+            if (j == arr[0]) prev[j] = true;
+        }
+
+        for(int i = 1; i < n; ++i) {
+            vector<bool> curr(sum+1);
+            for(int j = 0; j <= sum; ++j) {
+                curr[j] = prev[j];
+                if (j - arr[i] >= 0) curr[j] = curr[j] || prev[j-arr[i]];
+            }
+            prev = curr;
+        }
+
+        return prev[sum];
+    }
+};
+
 class Solution2{  
     // Tabulation
 public:
