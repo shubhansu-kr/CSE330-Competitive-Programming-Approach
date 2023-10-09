@@ -9,6 +9,39 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
+class Solution2{
+    // Recursion: Memoization
+public:
+    int solve(int &dp[][], int val[], int wt[], int W, int i) {
+        if (i < 0 || W <= 0) {
+            return 0;
+        }
+
+        if (dp[i][W] != -1) return dp[i][W];
+
+        int pick = 1e5, noPick;
+        if (W >= wt[i]) {
+            pick = val[i] + solve(val, wt, W-wt[i], i);
+        }
+
+        noPick = solve(val, wt, W, i-1);
+
+        return dp[i][W] = max(pick, noPick);
+    }
+
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        int dp[N][W+1];
+        for(int i = 0; i < N; ++i) {
+            for(int j = 0; j < W+1; ++j) {
+                dp[i][j] = -1;
+            }
+        }
+
+        return solve(dp, val, wt, W, N-1);
+    }
+};
+
 class Solution1{
     // Recursion: Optimised
 public:
