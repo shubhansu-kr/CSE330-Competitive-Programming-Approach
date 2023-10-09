@@ -9,6 +9,41 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
+class Solution3{
+    // Tabulation
+public:
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        int dp[N][W+1];
+
+        // Zero bag weight: No pick possible.
+        for(int i = 0; i < N; ++i) {
+            dp[i][0] = 0;
+        }
+
+        // only one item
+        for(int j = 1; j < W+1; ++j) {
+            dp[0][j] = j/wt[0] * val[0];
+        }
+
+        for(int i = 1; i < N; ++i) {
+            for(int j = 1; j < W+1; ++j) {
+                int pick = 1e5, noPick;
+                
+                if (j >= wt[i]) {
+                    pick = val[i] + dp[i][j-wt[i]];
+                }
+
+                noPick = dp[i-1][j];
+                
+                dp[i][j]  = max(pick, noPick);
+            }
+        }
+
+        return dp[N-1][W];
+    }
+};
+
 class Solution2{
     // Recursion: Memoization
 public:
@@ -21,10 +56,10 @@ public:
 
         int pick = 1e5, noPick;
         if (W >= wt[i]) {
-            pick = val[i] + solve(val, wt, W-wt[i], i);
+            pick = val[i] + solve(dp, val, wt, W-wt[i], i);
         }
 
-        noPick = solve(val, wt, W, i-1);
+        noPick = solve(dp, val, wt, W, i-1);
 
         return dp[i][W] = max(pick, noPick);
     }
