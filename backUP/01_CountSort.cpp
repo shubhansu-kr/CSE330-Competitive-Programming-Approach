@@ -19,8 +19,8 @@ public:
         // we will have to calculate shift.
         int shift = 0;
 
-        if (min < 0) {shift = min;}
-        else if (min > 0) {shift = -min;}
+        if (min < 0) {shift = -min;}
+        else if (min > 0) {shift = +min;}
 
         for(auto &it: nums) {
             count[it+shift]++;
